@@ -135,7 +135,7 @@ $.ajax({
         //popups
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
-            .setHTML(`${e.features[0].properties.number_of_persons_killed} ${singPlural} ${verb} killed by a ${e.features[0].properties.vehicle_type_code1.toLowerCase()} due to ${e.features[0].properties.contributing_factor_vehicle_1.toLowerCase()} at ${e.features[0].properties.crash_time} hours on ${e.features[0].properties.crash_date.substring(0, 10)}`)
+            .setHTML(`${e.features[0].properties.number_of_persons_killed} ${singPlural} ${verb} killed by a ${e.features[0].properties.vehicle_type_code1.toLowerCase()} due to ${e.features[0].properties.contributing_factor_vehicle_1.toLowerCase()} at ${moment(e.features[0].properties.crash_time, "hh:mm").format("h:mm a")} on ${moment(e.features[0].properties.crash_date).format("dddd, MMMM Do")}`)
             .addTo(map)
     });
 
