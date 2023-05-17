@@ -10,7 +10,10 @@ body {
     width: 100%;
 }
 
-#count {
+#count,
+#count_ped,
+#count_bike,
+#count_motor {
     font-weight: 800;
 }
 
@@ -51,4 +54,32 @@ body {
     height: 10px;
     margin-right: 5px;
     opacity: 60%;
+}
+
+
+.button{
+    margin-bottom: 5px;
+    border: 1px solid #12719e;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    color: #12719e;
+}
+
+.type-buttons button{
+    width: 32.25%;
+}
+
+.all-button button{
+    width: 100%;
+}
+
+.selected {
+    background-color: #12719e;
+    color: white;
+}
+
+h2 {
+    font-size: 12;
 }

@@ -8,16 +8,65 @@ $.ajax({
     data: {
         "$limit": 5000,
         "$$app_token": "2CyYsCwXD8tqO7Tn1vaeQwcxz",
-        "$where": "number_of_pedestrians_killed > 0 AND crash_date > '2023-01-01T00:00:00.000'"
+        "$where": "number_of_persons_killed > 0 AND crash_date > '2023-01-01T00:00:00.000'"
     }
 }).done(function (data) {
 
     mapboxgl.accessToken = 'pk.eyJ1IjoicHNwYXVzdGVyIiwiYSI6ImNsZ2JxN3p4djAyZDkzZ3BmOGR1ZTVhcWQifQ.499a8nIbNZgnjPf0qIGx8g';
     const NYC_COORDINATES = [-74.00214, 40.71882]
 
+    // Attach click event handlers to the buttons
+    $('#pedestrians').click(function () {
+        map.setFilter('circle-my-points', ['!=', ['get', 'number_of_pedestrians_killed'], "0"]);
+    });
+
+    $('#cyclist').click(function () {
+        map.setFilter('circle-my-points', ['!=', ['get', 'number_of_cyclist_killed'], "0"]);
+    });
+
+    $('#motorist').click(function () {
+        map.setFilter('circle-my-points', ['!=', ['get', 'number_of_motorist_killed'], "0"]);
+    });
+
+    $('#all').click(function () {
+        map.setFilter('circle-my-points', null);
+    });
+
+    // Add class to selected features
+    $('.button').on('click', function () {
+        $('.button').removeClass("selected")
+        $(this).addClass("selected")
+    })
+
     //add a running total to the main text
-    var count = data.features.length
+    // Convert string property to a number and sum all the values
+    var count = data.features.reduce(function (sum, feature) {
+        var value = parseFloat(feature.properties.number_of_persons_killed);
+        return sum + (isNaN(value) ? 0 : value);
+    }, 0);
+
     document.getElementById('count').innerHTML = count;
+
+    var count_ped = data.features.reduce(function (sum, feature) {
+        var value = parseFloat(feature.properties.number_of_pedestrians_killed);
+        return sum + (isNaN(value) ? 0 : value);
+    }, 0);
+
+    document.getElementById('count_ped').innerHTML = count_ped;
+
+    var count_bike = data.features.reduce(function (sum, feature) {
+        var value = parseFloat(feature.properties.number_of_cyclist_killed);
+        return sum + (isNaN(value) ? 0 : value);
+    }, 0);
+
+    document.getElementById('count_bike').innerHTML = count_bike;
+
+    var count_motor = data.features.reduce(function (sum, feature) {
+        var value = parseFloat(feature.properties.number_of_motorist_killed);
+        return sum + (isNaN(value) ? 0 : value);
+    }, 0);
+
+    document.getElementById('count_motor').innerHTML = count_motor;
 
     //set up map
     const map = new mapboxgl.Map({
@@ -29,6 +78,8 @@ $.ajax({
         bearing: 0,
         pitch: 0
     });
+
+
 
     //add sources and layers
     map.on('load', function () {
@@ -124,10 +175,10 @@ $.ajax({
     map.on('click', 'circle-my-points', (e) => {
 
         // conditional logic for sentence
-        var singPlural = "pedestrians"
+        var singPlural = "people"
         var verb = "were"
         if (e.features[0].properties.number_of_persons_killed === '1') {
-            var singPlural = "pedestrian"
+            var singPlural = "person"
             var verb = "was"
         }
 

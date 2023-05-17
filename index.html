@@ -3,26 +3,46 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Pedestrian Deaths in NYC - 2023</title>
+    <title>Traffic Deaths in NYC - 2023</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/956e037f4a.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
     <div class="sidebar">
         <div class="title">
-            Pedestrian Deaths in NYC
+            Traffic Deaths in NYC
         </div>
         <div class="description">
-            All <span id="count"></span> pedestrian deaths in NYC in the year 2023 so far, updated live from NYC's Open Data Portal
+            <p>All <span id="count"></span> road deaths in NYC in the year 2023 so far, updated live from NYC's Open
+                Data Portal</p>
         </div>
         <div class="description">
-            Click a marker to see the number of persons killed, the vehicle, and the cause of the accident.
+            <p>Click a marker to see the number of persons killed, the vehicle, and the cause of the accident.</p>
         </div>
         <div id="legend">
         </div>
+        <div class="type-buttons">
+            <h2 class="subhead">Filter by transit mode</h2>
+            <div class="description">
+                <p>This year, <span id="count_ped"></span> pedestrians, <span id="count_bike"></span> cyclists, and
+                    <span id="count_motor"></span> motorists have been killed.</p>
+            </div>
+            <button class="button" id="pedestrians">
+                <i class="fa-solid fa-person-walking"></i></button>
+            <button class="button" id="cyclist">
+                <i class="fa-solid fa-person-biking"></i></button>
+            <button class="button" id="motorist">
+                <i class="fa-solid fa-car-side"></i></button>
+        </div>
+        <div class="all-button">
+            <button class="button selected" class="btn btn-primary selected" id="all">Show all</i></button>
+        </div>
+
+
     </div>
 
     <div id="map"></div>
@@ -30,7 +50,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="js/app.js"></script>
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 </body>
 
 </html>
