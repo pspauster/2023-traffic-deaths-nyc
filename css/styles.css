@@ -99,3 +99,8 @@ p {
     padding-left: 5px;
     padding-right: 5px;
 }
+
+hr {
+    border-top: 1px solid black;
+    height: 0px;
+}
