@@ -86,6 +86,10 @@ h2 {
     margin-top: 5px;
 }
 
+p {
+    margin: 5px;
+}
+
 .legend-box {
     border: 1px solid black;
     border-radius: 5px;
